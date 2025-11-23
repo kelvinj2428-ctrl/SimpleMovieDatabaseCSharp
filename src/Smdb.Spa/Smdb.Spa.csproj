@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\AbcSolutionsCSharp\Abcs\Abcs.csproj" />
+    <ProjectReference Include="..\..\..\AbcSolutionsCSharp\src\Abcs\Abcs.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -28,12 +28,9 @@ public class DefaultMovieService : IMovieService
 
 	public async Task<Result<Movie>> CreateMovie(Movie newMovie)
 	{
-		var validationError = ValidateMovie(newMovie);
+		var validationResult = ValidateMovie(newMovie);
 
-		if(validationError != null)
-		{
-			return new Result<Movie>(validationError, (int) HttpStatusCode.BadRequest);
-		}
+		if(validationResult != null) { return validationResult;	}
 
 		var movie = await movieRepository.CreateMovie(newMovie);
 		var result = movie == null
@@ -55,12 +52,9 @@ public class DefaultMovieService : IMovieService
 
 	public async Task<Result<Movie>> UpdateMovie(int id, Movie newData)
 	{
-		var validationError = ValidateMovie(newData);
+		var validationResult = ValidateMovie(newData);
 
-		if(validationError != null)
-		{
-			return new Result<Movie>(validationError, (int) HttpStatusCode.BadRequest);
-		}
+		if(validationResult != null) { return validationResult;	}
 
 		var movie = await movieRepository.UpdateMovie(id, newData);
 		var result = movie == null
@@ -80,26 +74,26 @@ public class DefaultMovieService : IMovieService
 		return result;
 	}
 
-	private static Exception? ValidateMovie(Movie? movieData)
+	private static Result<Movie>? ValidateMovie(Movie? movieData)
 	{
 		if(movieData is null)
 		{
-			return new Exception("Movie payload is required.");
+			return new Result<Movie>(new Exception("Movie payload is required."), (int) HttpStatusCode.BadRequest);
 		}
 
 		if(string.IsNullOrWhiteSpace(movieData.Title))
 		{
-			return new Exception("Title is required and cannot be empty.");
+			return new Result<Movie>(new Exception("Title is required and cannot be empty."), (int) HttpStatusCode.BadRequest);
 		}
 
 		if(movieData.Title.Length > 256)
 		{
-			return new Exception("Title cannot be longer than 256 characters.");
+			return new Result<Movie>(new Exception("Title cannot be longer than 256 characters."), (int) HttpStatusCode.BadRequest);
 		}
 
 		if(movieData.Year < 1888 || movieData.Year > DateTime.UtcNow.Year)
 		{
-			return new Exception($"Year must be between 1888 and {DateTime.UtcNow.Year}.");
+			return new Result<Movie>(new Exception($"Year must be between 1888 and {DateTime.UtcNow.Year}."), (int) HttpStatusCode.BadRequest);
 		}
 
 		return null;

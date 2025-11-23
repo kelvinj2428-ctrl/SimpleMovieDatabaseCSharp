@@ -14,10 +14,10 @@ public class App : HttpServer
 	{
 		router.Use(HttpUtils.StructuredLogging);
 		router.Use(HttpUtils.CentralizedErrorHandling);
+		router.Use(HttpUtils.DefaultResponse);
 		router.Use(HttpUtils.AddResponseCorsHeaders);
 		router.Use(HttpUtils.ServeStaticFiles);
 		router.UseSimpleRouteMatching();
-		router.UseDefaultResponse();
 
 		router.MapGet("/", async (req, res, props, next) => { res.Redirect("/index.html"); await next(); });
 	}

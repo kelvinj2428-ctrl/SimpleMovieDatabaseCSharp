@@ -5,12 +5,16 @@ import { $, apiFetch, renderStatus, getQueryParam, captureMovieForm } from '/scr
   const form = $('#movie-form');
   const statusEl = $('#status');
 
+  // Disable form fields and do not allow editing if movie id is missing.
+
   if (!id) {
     renderStatus(statusEl, 'err', 'Missing ?id in URL.');
     form.querySelectorAll('input,textarea,button,select').forEach(el => el.disabled = true);
     return;
   }
 
+  // Populate form with data from movie (id) fetched from the API server.
+  
   try {
     const m = await apiFetch(`/movies/${encodeURIComponent(id)}`);
     form.title.value = m.title ?? '';
@@ -25,12 +29,22 @@ import { $, apiFetch, renderStatus, getQueryParam, captureMovieForm } from '/scr
   form.addEventListener('submit', async (ev) => {
     ev.preventDefault();
     const payload = captureMovieForm(form);
+
+    // Input validation and feedback goes here. For example:
+    //
+    // if(payload.year > new Date().getFullYear()) {
+    //   renderStatus(statusEl, 'err', 'Movie year cannot be in the future.');
+    //   return;
+    // } else if (...) {
+    //   ...
+    // }
+
     try {
       const updated = await apiFetch(`/movies/${encodeURIComponent(id)}`, {
         method: 'PUT',
         body: JSON.stringify(payload),
       });
-      renderStatus(statusEl, 'ok', `Updated movie #${updated.id} (${updated.title}).`);
+      renderStatus(statusEl, 'ok', `Updated movie #${updated.id} "${updated.title}" (${updated.year}).`);
     } catch (err) {
       renderStatus(statusEl, 'err', `Update failed: ${err.message}`);
     }

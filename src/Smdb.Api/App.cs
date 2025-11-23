@@ -33,11 +33,11 @@ public class App : HttpServer
 
 		router.Use(HttpUtils.StructuredLogging);
 		router.Use(HttpUtils.CentralizedErrorHandling);
+		router.Use(HttpUtils.DefaultResponse);
 		router.Use(HttpUtils.ParseRequestUrl);
 		router.Use(HttpUtils.ParseRequestQueryString);
 		router.Use(HttpUtils.AddResponseCorsHeaders);
 		router.UseParametrizedRouteMatching();
-		router.UseDefaultResponse();
 
 		router.UseRouter("/api/v1", apiRouter);
 		apiRouter.UseRouter("/movies", movieRouter);
