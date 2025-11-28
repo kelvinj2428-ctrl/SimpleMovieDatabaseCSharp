@@ -12,7 +12,7 @@ import { $, apiFetch, renderStatus, getQueryParam } from '/scripts/common.js';
     $('#movie-year').textContent = m.year;
     $('#movie-desc').textContent = m.description || '—';
     $('#edit-link').href = `/movies/edit.html?id=${encodeURIComponent(m.id)}`;
-    renderStatus(statusEl, '', '');
+    renderStatus(statusEl, 'ok', 'Movie loaded successfully.');
   } catch (err) {
     renderStatus(statusEl, 'err', `Failed to load movie ${id}: ${err.message}`);
   }
