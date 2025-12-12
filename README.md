@@ -1,5 +1,5 @@
 # SimpleMovieDatabaseCSharp
-A simple movie database for teaching front-end, back-end, and full-stack concepts from scratch using no frameworks.
+A simple movie database for teaching front-end, back-end, and full-stack concepts. Made from scratch; using no frameworks.
 
 ## Overview
 A simple movie database website that allows users to:
