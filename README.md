@@ -27,6 +27,15 @@ I plan to create several repos that do the same but using other programming lang
 - Express (JavaScript)
 - Django (Python)
 
+## Dependencies
+
+### AbcSolutionsCSharp Repo
+This repo does not uses git submodules or NuGets (yet), just clone this repo as a sibling solution folder (not nested inside).
+`projects/AbcSolutionsCSharp`
+`projects/SimpleMovieDatabaseCSharp`
+
+[https://github.com/hbruckman/AbcSolutionsCSharp](https://github.com/hbruckman/AbcSolutionsCSharp)
+
 ## YouTube - Playlist - How to Make a Server-Side Rendered (SSR) Simple Movie Database Web Application (C#) [Spanish]
 [https://www.youtube.com/playlist?list=PL5H56Gf7ZKW8Fez7KqbryIyTsVVRBgq3F](https://www.youtube.com/playlist?list=PL5H56Gf7ZKW8Fez7KqbryIyTsVVRBgq3F)
 
