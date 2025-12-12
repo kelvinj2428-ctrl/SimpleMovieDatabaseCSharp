@@ -25,5 +25,8 @@ I plan to create several repos that do the same but using other programming lang
 - Express (JavaScript)
 - Django (Python)
 
-## YouTube - Playlist - Back-End Web Development - SimpleMDB [Spanish] (2025-05)
+## YouTube - Playlist - How to Make a Server-Side Rendered (SSR) Simple Movie Database Web Application (C#) [Spanish]
 [https://www.youtube.com/playlist?list=PL5H56Gf7ZKW8Fez7KqbryIyTsVVRBgq3F](https://www.youtube.com/playlist?list=PL5H56Gf7ZKW8Fez7KqbryIyTsVVRBgq3F)
+
+## YouTube - Playlist - How to Make a Client-Side Rendered (CSR) Simple Movie Database Web Application (C#) [Spanish]
+[https://www.youtube.com/playlist?list=PL5H56Gf7ZKW87mCVZMf5ZHHem1B-IgCQ8](https://www.youtube.com/playlist?list=PL5H56Gf7ZKW87mCVZMf5ZHHem1B-IgCQ8)
