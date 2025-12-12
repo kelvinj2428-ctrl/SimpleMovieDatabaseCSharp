@@ -14,7 +14,7 @@ This codebase has the following characteristics:
   - Server-Side Rendered (SSR)
   - Client-Side Rendered (CSR)
   - Single Page Application (SPA)
- 
+
 ## Future Work
 I plan to create several repos that do the same but using other programming languages and frameworks:
 - Plain Old Vanilla .Net Core (C#)
@@ -24,3 +24,6 @@ I plan to create several repos that do the same but using other programming lang
 - Spring Boot (Java)
 - Express (JavaScript)
 - Django (Python)
+
+## YouTube - Playlist - Back-End Web Development - SimpleMDB [Spanish] (2025-05)
+[https://www.youtube.com/playlist?list=PL5H56Gf7ZKW8Fez7KqbryIyTsVVRBgq3F](https://www.youtube.com/playlist?list=PL5H56Gf7ZKW8Fez7KqbryIyTsVVRBgq3F)
