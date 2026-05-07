@@ -4,9 +4,9 @@ using Abcs.Http;
 
 public interface IMovieService
 {
-	public Task<Result<PagedResult<Movie>>> ReadMovies(int page, int size);
-	public Task<Result<Movie>> CreateMovie(Movie movie);
-	public Task<Result<Movie>> ReadMovie(int id);
-	public Task<Result<Movie>> UpdateMovie(int id, Movie newData);
-	public Task<Result<Movie>> DeleteMovie(int id);
+	public Task<Result<Movie>> Create(Movie newData);
+	public Task<Result<Movie>> Read(int id);
+	public Task<Result<Movie>> Update(int id, Movie updatedData);
+	public Task<Result<Movie>> Delete(int id);
+	public Task<Result<PagedResult<Movie>>> List(int page, int size);
 }

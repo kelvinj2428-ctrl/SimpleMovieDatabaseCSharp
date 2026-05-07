@@ -1,27 +1,145 @@
+namespace Smdb.Core.Shared;
+
+using Smdb.Core.Actors;
+using Smdb.Core.ActorsMovies;
 using Smdb.Core.Movies;
-using Smdb.Core.Genres;
-using Smdb.Core.MoviesGenres;
+using Smdb.Core.Users;
 
 public class MemoryDatabase
 {
+	public List<Actor> Actors { get; }
+	public List<ActorMovie> ActorsMovies { get; }
 	public List<Movie> Movies { get; }
-	public List<Genre> Genres { get; }
-	public List<MovieGenre> MoviesGenres { get; }
+	public List<User> Users { get; }
+
+	private int nextActorId;
+	private int nextActorMovieId;
 	private int nextMovieId;
-	private int nextGenreId;
-	private int nextMovieGenreId;
+	private int nextUserId;
 
 	public MemoryDatabase()
 	{
+		Actors = [];
+		ActorsMovies = [];
 		Movies = [];
-		Genres = [];
-		MoviesGenres = [];
-		SeedMovies();
-		SeedGenres();
-		SeedMoviesGenres();
+		Users = [];
+
+		nextActorId = Actors.Count;
+		nextActorMovieId = ActorsMovies.Count;
 		nextMovieId = Movies.Count;
-		nextGenreId = Genres.Count;
-		nextMovieGenreId = MoviesGenres.Count;
+		nextUserId = Users.Count;
+
+		SeedActors();
+		SeedActorsMovies();
+		SeedMovies();
+		SeedUsers();
+	}
+
+	private void SeedActors()
+	{
+		// Pre‐populated arrays of 100 real‐sounding first and last names
+		var firstNames = new[]
+		{
+			"James", "Mary", "John", "Patricia", "Robert", "Jennifer", "Michael", "Linda",
+			"William", "Elizabeth", "David", "Barbara", "Richard", "Susan", "Joseph", "Jessica",
+			"Thomas", "Sarah", "Charles", "Karen", "Christopher", "Nancy", "Daniel", "Lisa",
+			"Matthew", "Margaret", "Anthony", "Betty", "Donald", "Sandra", "Mark", "Ashley",
+			"Paul", "Dorothy", "Steven", "Kimberly", "Andrew", "Emily", "Kenneth", "Donna",
+			"George", "Michelle", "Joshua", "Carol", "Kevin", "Amanda", "Brian", "Melissa",
+			"Edward", "Deborah", "Ronald", "Stephanie", "Timothy", "Rebecca", "Jason", "Laura",
+			"Jeffrey", "Sharon", "Ryan", "Cynthia", "Jacob", "Kathleen", "Gary", "Helen",
+			"Nicholas", "Amy", "Eric", "Shirley", "Stephen", "Angela", "Jonathan", "Anna",
+			"Larry", "Brenda", "Justin", "Pamela", "Scott", "Nicole", "Brandon", "Emma",
+			"Benjamin", "Samantha", "Samuel", "Katherine", "Gregory", "Christine", "Frank",
+			"Debra", "Alexander", "Rachel", "Raymond", "Catherine", "Patrick", "Carolyn",
+			"Jack", "Janet", "Dennis", "Ruth", "Peter", "Heather"
+		};
+
+		var lastNames = new[]
+		{
+			"Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis",
+			"Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson", "Thomas",
+			"Taylor", "Moore", "Jackson", "Martin", "Lee", "Perez", "Thompson", "White",
+			"Harris", "Sanchez", "Clark", "Ramirez", "Lewis", "Robinson", "Walker", "Young",
+			"Allen", "King", "Wright", "Scott", "Torres", "Nguyen", "Hill", "Flores",
+			"Green", "Adams", "Nelson", "Baker", "Hall", "Rivera", "Campbell", "Mitchell",
+			"Carter", "Roberts", "Gomez", "Phillips", "Evans", "Turner", "Diaz", "Parker",
+			"Cruz", "Edwards", "Collins", "Reyes", "Stewart", "Morris", "Morales", "Murphy",
+			"Cook", "Rogers", "Gutierrez", "Ortiz", "Morgan", "Cooper", "Peterson", "Bailey",
+			"Reed", "Kelly", "Howard", "Ramos", "Kim", "Cox", "Ward", "Richardson",
+			"Watson", "Brooks", "Chavez", "Wood", "James", "Bennett", "Gray", "Mendoza",
+			"Ruiz", "Hughes", "Price", "Alvarez", "Castillo", "Sanders", "Patel", "Myers",
+			"Long", "Ross", "Foster", "Jimenez"
+		};
+
+		// A small palette of “career highlights” to vary each bio
+		var highlights = new[]
+		{
+			"drama and action films",
+			"comedies and musicals",
+			"independent art‐house features",
+			"television drama series",
+			"blockbuster sci‐fi movies",
+			"thriller and horror genres",
+			"historical biopics",
+			"romantic comedies",
+			"animated feature films",
+			"stage and screen productions"
+		};
+
+		var random = new Random();
+
+		for (int i = 0; i < firstNames.Length; i++)
+		{
+			// generate a rating between 0.0 and 10.0, rounded to one decimal place
+			float rating = (float)Math.Round(random.NextDouble() * 10, 1);
+
+			// pick one of the highlights to personalize the bio
+			string career = highlights[i % highlights.Length];
+
+			// build a short bio
+			string bio = $"{firstNames[i]} {lastNames[i]} is an actor known for their work in {career}. " +
+									 "Over their career, they have garnered critical acclaim and a devoted fan base.";
+
+			// create and add the actor
+			Actors.Add(new Actor(nextActorId++, firstNames[i], lastNames[i], bio, rating));
+		}
+	}
+
+	private void SeedActorsMovies()
+	{
+		string[] movieRoles = new string[]
+		{
+			"Protagonist", "Antagonist", "Hero", "Villain", "Sidekick", "Love Interest",
+			"Mentor", "Comic Relief", "Detective", "Police Officer", "Spy", "Soldier",
+			"General", "King", "Queen", "Prince", "Princess", "Knight", "Wizard",
+			"Sorcerer", "Witch", "Alien", "Robot", "Scientist", "Doctor", "Nurse",
+			"Lawyer", "Judge", "Criminal", "Thief", "Assassin", "Hitman",
+			"Journalist", "Photographer", "Teacher", "Student", "Athlete",
+			"Coach", "Musician", "Singer", "Actor", "Director", "Producer",
+			"Businessman", "CEO", "Entrepreneur", "Farmer", "Cowboy", "Outlaw",
+			"Pirate", "Sailor", "Captain", "Pilot", "Engineer", "Mechanic",
+			"Driver", "Taxi Driver", "Truck Driver", "Firefighter", "Paramedic",
+			"Security Guard", "Bodyguard", "Bounty Hunter", "Explorer", "Archaeologist",
+			"Historian", "Librarian", "Chef", "Waiter", "Bartender", "Butler",
+			"Maid", "Housekeeper", "Nanny", "Parent", "Mother", "Father",
+			"Sibling", "Brother", "Sister", "Child", "Teenager", "Elder",
+			"Ghost", "Vampire", "Werewolf", "Zombie", "Monster", "Superhero",
+			"Supervillain", "Time Traveler", "Clone", "AI Companion", "Rebel",
+			"Leader", "Follower", "Survivor", "Victim"
+		};
+
+		Random r = new Random();
+
+		for (int aid = 0; aid < 100; aid++)
+		{
+			int count = r.Next(100);
+			for (int j = 0; j < count; j++)
+			{
+				int mid = r.Next(100);
+				ActorsMovies.Add(new ActorMovie(nextActorMovieId++, aid, mid, movieRoles[r.Next(movieRoles.Length)]));
+			}
+		}
 	}
 
 	private void SeedMovies()
@@ -81,85 +199,35 @@ public class MemoryDatabase
 		});
 	}
 
-	private void SeedGenres()
+	private void SeedUsers()
 	{
-		Genres.AddRange(new Genre[]
+		var usernames = new string[]
 		{
-			new Genre(1, "Action"),
-			new Genre(2, "Adventure"),
-			new Genre(3, "Animation"),
-			new Genre(4, "Biography"),
-			new Genre(5, "Comedy"),
-			new Genre(6, "Crime"),
-			new Genre(7, "Drama"),
-			new Genre(8, "Family"),
-			new Genre(9, "Fantasy"),
-			new Genre(10, "History"),
-			new Genre(11, "Horror"),
-			new Genre(12, "Music"),
-			new Genre(13, "Mystery"),
-			new Genre(14, "Romance"),
-			new Genre(15, "Sci-Fi"),
-			new Genre(16, "Thriller"),
-			new Genre(17, "War")
-		});
+			"papo", "pepo", "popo", "pipo",
+			"momo", "moma", "mama", "papa",
+			"lalo", "lola", "lala", "lilo"
+		};
+
+		Random r = new Random();
+
+		foreach (var username in usernames)
+		{
+			var pass = Path.GetRandomFileName();
+			var salt = Path.GetRandomFileName();
+			var role = Roles.ROLES[r.Next(Roles.ROLES.Length)];
+			User user = new User(nextUserId++, username, pass, salt, role);
+			Users.Add(user);
+		}
 	}
 
-	private void SeedMoviesGenres()
+	public int NextActorId()
 	{
-		MoviesGenres.AddRange(new MovieGenre[]
-		{
-			new MovieGenre(1, 6),  new MovieGenre(1, 7),
-			new MovieGenre(2, 6),  new MovieGenre(2, 7),
-			new MovieGenre(3, 1),  new MovieGenre(3, 6),  new MovieGenre(3, 7),
-			new MovieGenre(4, 7),
-			new MovieGenre(5, 6),  new MovieGenre(5, 7),
-			new MovieGenre(6, 4),  new MovieGenre(6, 7),  new MovieGenre(6, 10),
-			new MovieGenre(7, 2),  new MovieGenre(7, 9),  new MovieGenre(7, 7),
-			new MovieGenre(8, 7),
-			new MovieGenre(9, 7),  new MovieGenre(9, 14),
-			new MovieGenre(10, 1), new MovieGenre(10, 15), new MovieGenre(10, 16),
-			new MovieGenre(11, 1), new MovieGenre(11, 15),
-			new MovieGenre(12, 6), new MovieGenre(12, 7), new MovieGenre(12, 16),
-			new MovieGenre(13, 4), new MovieGenre(13, 6), new MovieGenre(13, 7),
-			new MovieGenre(14, 6), new MovieGenre(14, 7), new MovieGenre(14, 16),
-			new MovieGenre(15, 1), new MovieGenre(15, 2), new MovieGenre(15, 15),
-			new MovieGenre(16, 1), new MovieGenre(16, 2), new MovieGenre(16, 9),
-			new MovieGenre(17, 2), new MovieGenre(17, 7), new MovieGenre(17, 15),
-			new MovieGenre(18, 5), new MovieGenre(18, 7), new MovieGenre(18, 16),
-			new MovieGenre(19, 3), new MovieGenre(19, 2), new MovieGenre(19, 8),
-			new MovieGenre(20, 6), new MovieGenre(20, 7),
-			new MovieGenre(21, 7), new MovieGenre(21, 17),
-			new MovieGenre(22, 6), new MovieGenre(22, 7), new MovieGenre(22, 9),
-			new MovieGenre(23, 1), new MovieGenre(23, 2), new MovieGenre(23, 7),
-			new MovieGenre(24, 3), new MovieGenre(24, 2), new MovieGenre(24, 7),
-			new MovieGenre(25, 2), new MovieGenre(25, 5), new MovieGenre(25, 15),
-			new MovieGenre(26, 6), new MovieGenre(26, 7), new MovieGenre(26, 16),
-			new MovieGenre(27, 7), new MovieGenre(27, 12),
-			new MovieGenre(28, 7), new MovieGenre(28, 13), new MovieGenre(28, 15),
-			new MovieGenre(29, 6), new MovieGenre(29, 13), new MovieGenre(29, 16),
-			new MovieGenre(30, 1), new MovieGenre(30, 15),
-			new MovieGenre(31, 11), new MovieGenre(31, 15),
-			new MovieGenre(32, 1), new MovieGenre(32, 15), new MovieGenre(32, 16),
-			new MovieGenre(33, 15), new MovieGenre(33, 16),
-			new MovieGenre(34, 7), new MovieGenre(34, 17),
-			new MovieGenre(35, 7),
-			new MovieGenre(36, 6), new MovieGenre(36, 7),
-			new MovieGenre(37, 1), new MovieGenre(37, 7), new MovieGenre(37, 13),
-			new MovieGenre(38, 5), new MovieGenre(38, 14),
-			new MovieGenre(39, 4), new MovieGenre(39, 7), new MovieGenre(39, 12),
-			new MovieGenre(40, 7),
-			new MovieGenre(41, 6), new MovieGenre(41, 7), new MovieGenre(41, 16),
-			new MovieGenre(42, 7),
-			new MovieGenre(43, 1), new MovieGenre(43, 2), new MovieGenre(43, 15),
-			new MovieGenre(44, 5), new MovieGenre(44, 7), new MovieGenre(44, 12),
-			new MovieGenre(45, 6), new MovieGenre(45, 7), new MovieGenre(45, 16),
-			new MovieGenre(46, 1), new MovieGenre(46, 2), new MovieGenre(46, 15),
-			new MovieGenre(47, 1), new MovieGenre(47, 2), new MovieGenre(47, 15),
-			new MovieGenre(48, 3), new MovieGenre(48, 2), new MovieGenre(48, 5),
-			new MovieGenre(49, 3), new MovieGenre(49, 2), new MovieGenre(49, 5),
-			new MovieGenre(50, 4), new MovieGenre(50, 7)
-		});
+		return ++nextActorId;
+	}
+
+	public int NextActorMovieId()
+	{
+		return ++nextActorMovieId;
 	}
 
 	public int NextMovieId()
@@ -167,13 +235,8 @@ public class MemoryDatabase
 		return ++nextMovieId;
 	}
 
-	public int NextGenreId()
+	public int NextUserId()
 	{
-		return ++nextGenreId;
-	}
-
-	public int NextMovieGenreId()
-	{
-		return ++nextMovieGenreId;
+		return ++nextUserId;
 	}
 }

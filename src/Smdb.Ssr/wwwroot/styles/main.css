@@ -1,0 +1,270 @@
+/* Reset & Base */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+}
+
+body {
+	background-color: #0f172a;
+	color: #e2e8f0;
+	line-height: 1.6;
+}
+
+/* Header */
+.header {
+	text-align: center;
+	padding: 20px;
+	background: #1e293b;
+	color: #f8fafc;
+	font-size: 2rem;
+	border-bottom: 2px solid #334155;
+}
+
+/* Navigation */
+nav {
+	background: #020617;
+	border-bottom: 1px solid #1e293b;
+}
+
+nav ul {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+nav ul li {
+	margin: 10px 15px;
+}
+
+nav a {
+	text-decoration: none;
+	color: #cbd5f5;
+	font-weight: 500;
+	transition: color 0.3s ease;
+}
+
+nav a:hover {
+	color: #38bdf8;
+}
+
+/* Logout button styling */
+nav form {
+	display: inline;
+}
+
+nav input[type="submit"] {
+	background: #ef4444;
+	border: none;
+	color: white;
+	padding: 6px 12px;
+	cursor: pointer;
+	border-radius: 4px;
+	transition: background 0.3s ease;
+}
+
+nav input[type="submit"]:hover {
+	background: #dc2626;
+}
+
+/* Content */
+.content {
+	max-width: 1000px;
+	margin: 30px auto;
+	padding: 20px;
+	background: #1e293b;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Message box */
+.message {
+	max-width: 800px;
+	margin: 20px auto;
+	padding: 15px;
+	text-align: center;
+	border-radius: 6px;
+	background: #334155;
+	color: #f1f5f9;
+	border-left: 5px solid #38bdf8;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+	nav ul {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	nav ul li {
+		margin: 8px 0;
+	}
+
+	.header {
+		font-size: 1.5rem;
+	}
+}
+
+/* =========================
+   Forms
+========================= */
+.addform,
+.editform,
+.authform {
+	max-width: 500px;
+	margin: 20px auto;
+	padding: 20px;
+	background: #1e293b;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+	display: flex;
+	flex-direction: column;
+}
+
+form label {
+	margin: 10px 0 5px;
+	font-weight: 500;
+	color: #cbd5f5;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="number"],
+form select {
+	padding: 8px 10px;
+	border-radius: 4px;
+	border: 1px solid #334155;
+	background: #020617;
+	color: #e2e8f0;
+	outline: none;
+	transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+form input:focus,
+form select:focus {
+	border-color: #38bdf8;
+	box-shadow: 0 0 5px rgba(56, 189, 248, 0.5);
+}
+
+.addform input[type="submit"],
+.editform input[type="submit"],
+.authform input[type="submit"] {
+	margin-top: 15px;
+	padding: 10px;
+	background: #22c55e;
+	border: none;
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+	font-weight: 600;
+	transition: background 0.3s ease;
+}
+
+.addform input[type="submit"]:hover,
+.editform input[type="submit"]:hover,
+.authform input[type="submit"]:hover {
+	background: #16a34a;
+}
+
+/* Add link */
+.add {
+	text-align: center;
+	margin: 15px 0;
+}
+
+.add a {
+	text-decoration: none;
+	color: #38bdf8;
+	font-weight: 600;
+}
+
+.add a:hover {
+	text-decoration: underline;
+}
+
+/* =========================
+   Table
+========================= */
+.viewall,
+.view {
+	width: 95%;
+	margin: 20px auto;
+	border-collapse: collapse;
+	background: #1e293b;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.viewall thead,
+.view thead {
+	background: #020617;
+}
+
+.viewall th,
+.view th,
+.viewall td,
+.view td {
+	padding: 10px;
+	text-align: center;
+	border-bottom: 1px solid #334155;
+}
+
+.viewall th,
+.view th {
+	color: #f1f5f9;
+	font-weight: 600;
+}
+
+.viewall td,
+.view td {
+	color: #cbd5f5;
+}
+
+.viewall tbody tr:hover,
+.view tbody tr:hover {
+	background: #334155;
+}
+
+/* Action links inside table */
+.viewall a,
+.view a {
+	color: #38bdf8;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+.viewall a:hover,
+.view a:hover {
+	text-decoration: underline;
+}
+
+/* =========================
+   Pagination
+========================= */
+.pagination {
+	text-align: center;
+	margin: 20px 0;
+}
+
+.pagination a {
+	margin: 0 8px;
+	padding: 6px 12px;
+	background: #020617;
+	color: #cbd5f5;
+	text-decoration: none;
+	border-radius: 4px;
+	transition: background 0.3s ease;
+}
+
+.pagination a:hover {
+	background: #334155;
+}
+
+.pagination span {
+	margin: 0 10px;
+	font-weight: 600;
+	color: #f1f5f9;
+}
