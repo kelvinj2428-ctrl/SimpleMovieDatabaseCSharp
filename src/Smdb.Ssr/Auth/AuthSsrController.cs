@@ -64,7 +64,7 @@ public class AuthController
 			</main>
     ";
 
-		string content = HtmlTemplates.Base("SimpleMDB", "Landing Page", html, message);
+		string content = HtmlTemplates.Base("SimpleMDB", "Simple Movie Database", html, message);
 		await HttpUtils.SendResponse(req, res, options, (int)HttpStatusCode.OK, content);
 	}
 

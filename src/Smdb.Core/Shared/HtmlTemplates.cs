@@ -16,6 +16,7 @@ public class HtmlTemplates
         <h1 class=""header"">{header}</h1>
 				<nav>
 					<ul>
+						<li><a href=""/"">Home</a></li>
 						<li><a href=""/register"">Register</a></li>
 						<li><a href=""/login"">Login</a></li>
 						<li>
@@ -24,7 +25,7 @@ public class HtmlTemplates
 							</form>
 						</li>
 						<li><a href=""/actors"">Actors</a></li>
-						<li><a href=""/actorsmovies"">Actors Movies</a></li>
+						<!-- <li><a href=""/actorsmovies"">Actors Movies</a></li>-->
 						<li><a href=""/movies"">Movies</a></li>
 						<li><a href=""/users"">Users</a></li>
 					</ul>
