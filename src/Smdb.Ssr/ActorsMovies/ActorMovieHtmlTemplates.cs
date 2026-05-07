@@ -132,7 +132,7 @@ public class ActorMovieHtmlTemplates
 		}
 
 		string html = $@"
-    <form action=""/actors/movies/add"" method=""POST"">
+    <form class=""addform"" action=""/actors/movies/add"" method=""POST"">
       <label for=""aid"">Actor</label>
       <select id=""aid"" name=""aid"">
         <option value=""{actor.Id}"">{actor.FirstName} {actor.LastName}</option>
@@ -160,7 +160,7 @@ public class ActorMovieHtmlTemplates
 		}
 
 		string html = $@"
-    <form action=""/movies/actors/add"" method=""POST"">
+    <form class=""addform"" action=""/movies/actors/add"" method=""POST"">
       <label for=""mid"">Movie</label>
       <select id=""mid"" name=""mid"">
         <option value=""{movie.Id}"">{movie.Title} ({movie.Year})</option>
