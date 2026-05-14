@@ -23,23 +23,23 @@ public class App : HttpServer
 	public override void Init()
 	{
 		//var userRepository = new MockUserRepository();
-		var userRepository = new MySqlUserRepository("Server=localhost;Database=simplemdb;Uid=root;Pwd=12345;");
+		var userRepository = new MySqlUserRepository("Server=localhost;Database=simplemdb;Uid=root;Pwd=54321;");
 		var userService = new DefaultUserService(userRepository);
 		var userController = new UserController(userService);
 		var authController = new AuthController(userService);
 
 		//var actorRepository = new MockActorRepository();
-		var actorRepository = new MySqlActorRepository("Server=localhost;Database=simplemdb;Uid=root;Pwd=12345;");
+		var actorRepository = new MySqlActorRepository("Server=localhost;Database=simplemdb;Uid=root;Pwd=54321;");
 		var actorService = new DefaultActorService(actorRepository);
 		var actorController = new ActorController(actorService);
 
 		//var movieRepository = new MockMovieRepository();
-		var movieRepository = new MySqlMovieRepository("Server=localhost;Database=simplemdb;Uid=root;Pwd=12345;");
+		var movieRepository = new MySqlMovieRepository("Server=localhost;Database=simplemdb;Uid=root;Pwd=54321;");
 		var movieService = new DefaultMovieService(movieRepository);
 		var movieController = new MovieController(movieService);
 
 		//var actorMovieRepository = new MockActorMovieRepository(actorRepository, movieRepository);
-		var actorMovieRepository = new MySqlActorMovieRepository("Server=localhost;Database=simplemdb;Uid=root;Pwd=12345;");
+		var actorMovieRepository = new MySqlActorMovieRepository("Server=localhost;Database=simplemdb;Uid=root;Pwd=54321;");
 		var actorMovieService = new DefaultActorMovieService(actorMovieRepository);
 		var actorMovieController = new ActorMovieController(actorMovieService, actorService, movieService);
 
