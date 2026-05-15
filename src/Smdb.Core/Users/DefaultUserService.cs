@@ -89,9 +89,13 @@ public class DefaultUserService : IUserService
 		{
 			return new Result<User>(new Exception("Username cannot have more than 16 characters."));
 		}
-		else if (await userRepository.GetUserByUsername(updatedData.Username) != null)
+		else
 		{
-			return new Result<User>(new Exception("Username already taken. Choose another username."));
+			User? existingUser = await userRepository.GetUserByUsername(updatedData.Username);
+			if (existingUser != null && existingUser.Id != id)
+			{
+				return new Result<User>(new Exception("Username already taken. Choose another username."));
+			}
 		}
 
 		if (string.IsNullOrWhiteSpace(updatedData.Password))
